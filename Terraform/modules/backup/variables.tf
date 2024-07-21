@@ -1,0 +1,1 @@
+variable "efs_arn" {}
