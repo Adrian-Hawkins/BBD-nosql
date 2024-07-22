@@ -2,11 +2,13 @@ import tornado.ioloop
 import tornado.web
 
 from http_request_handlers.create_product_request_handler import CreateProductRequestHandler
+from http_request_handlers.helath_request_handler import HealthRequestHandler
 
 
 def make_app():
     return tornado.web.Application([
         (r"/", CreateProductRequestHandler),
+        (r'/health', HealthRequestHandler)
     ])
 
 
