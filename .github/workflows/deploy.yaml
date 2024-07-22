@@ -3,7 +3,7 @@ name: Deploy API
 on:
   push:
     branches:
-      - feature/backend
+      - main
 
 env:
   AWS_REGION: eu-west-1
@@ -37,6 +37,6 @@ jobs:
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -f src/Dockerfile .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
-    # - name: Force new deployment of ECS service
-    #   run: |
-    #     aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
+    - name: Force new deployment of ECS service
+      run: |
+        aws ecs update-service --cluster $ECS_CLUSTER --service $ECS_SERVICE --force-new-deployment
