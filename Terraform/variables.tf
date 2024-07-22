@@ -8,3 +8,8 @@ variable "db_password" {
   type        = string
   sensitive   = true
 }
+
+variable "db_connection_string" {
+  description = "Database connection string"
+  type        = string
+}

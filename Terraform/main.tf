@@ -2,6 +2,11 @@ module "networking" {
   source = "./modules/networking"
 }
 
+module "api_ecr" {
+  source          = "./modules/api_ecr"
+  repository_name = "api-repo"
+}
+
 module "ecs" {
   source            = "./modules/ecs"
   vpc_id            = module.networking.vpc_id
