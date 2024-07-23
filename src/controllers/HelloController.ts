@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { Controller, Get, Post, Injected } from "../lib/decorators";
+import { Controller, Get, Post } from "../lib/decorators";
 import { controller, EndpointDefenition } from '../lib/interfaces';
-import {UserQuery} from "../queries/user.query";
+import { DBPool } from '../database';
 
 @Controller('/health')
 export class HelloController implements controller {
@@ -14,10 +14,11 @@ export class HelloController implements controller {
 
 
 
-  @Get('/user/:id')
-  test(req: Request, res: Response) {
-    const { id } = req.params;
-    res.send(`User ID: ${id}`);
+  @Get('/')
+  async test(req: Request, res: Response) {
+    res.send({
+      message: "Healthy"
+    });
   }
 
   @Post('/echo')
