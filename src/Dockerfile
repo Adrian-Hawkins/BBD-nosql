@@ -1,8 +1,8 @@
-FROM python:3.10-slim
+FROM node:21-alpine
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY ./src .
-ENV PYTHONPATH=/app
+COPY package*.json ./
+RUN npm ci
+COPY tsconfig.json ./
+COPY ./src ./src
 EXPOSE 8888
-CMD ["python", "main.py"]
+CMD ["npm", "run", "serve"]

@@ -8,6 +8,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: dev
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d/
     restart: unless-stopped
     networks:
       - postgres-network
