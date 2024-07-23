@@ -24,33 +24,23 @@ services:
       - "5050:80"
     networks:
       - postgres-network
-  
-  age-ui:
-    build:
-      context: .
-      dockerfile: age-viewer/Dockerfile
-    container_name: age-ui
-    ports:
-      - "3001:3001"
-    networks:
-      - postgres-network
 
-  api:
-    build:
-      context: .
-      dockerfile: src/Dockerfile
-    ports:
-      - "8889:8888"
-    networks:
-      - postgres-network
-    restart: unless-stopped
-
-  terraform:
-    build:
-      context: .
-      dockerfile: Terraform/Dockerfile
-    volumes:
-      - ./Terraform:/workspace
+#  api:
+#    build:
+#      context: .
+#      dockerfile: src/Dockerfile
+#    ports:
+#      - "8889:8888"
+#    networks:
+#      - postgres-network
+#    restart: unless-stopped
+#
+#  terraform:
+#    build:
+#      context: .
+#      dockerfile: Terraform/Dockerfile
+#    volumes:
+#      - ./Terraform:/workspace
 
 networks:
   postgres-network:

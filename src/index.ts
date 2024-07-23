@@ -18,16 +18,6 @@ app.use((req, res, next) => {
 
 app.use(logRequest);
 
-app.use((req, res, next) => {
-    req.headers.something = "s;gjdg";
-    next()
-});
-
-app.get('/', (req, res) => {
-    res.status(200).send({
-        message: 'Hello, World!'
-    });
-})
 
 registerControllers(app, [
   HelloController
