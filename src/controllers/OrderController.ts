@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
-import { Controller, Get, Patch } from "../lib/decorators";
+import { Controller, Get, Patch, Post } from "../lib/decorators";
 import { controller, EndpointDefenition } from '../lib/interfaces';
 import {CreateOrderCommand} from "../commands/createOrder.command";
 import {AddHoodiesToOrderCommand} from "../commands/addHoodiesToOrder.command";
 import {GetOrderQuery} from "../queries/getOrder.query";
 import {CompleteOrderCommand} from "../commands/completeOrder.command";
+import {GetOrderWithQuery} from "../queries/getOrderwith.query";
 
 @Controller('/order')
 export class OrderController implements controller {
@@ -83,6 +84,23 @@ export class OrderController implements controller {
                 message: "Failed to complete order",
                 info: e
             });
+        }
+    }
+
+    @Post('/withKey')
+    async withKey(req: Request, res: Response) {
+        const { customerId, key, value } = req.body;
+        try {
+            const query = new GetOrderWithQuery();
+            const orders = await query.execute(customerId, key, value);
+            res.send({
+                message: "success",
+                orders
+            });
+        } catch(e) {
+            res.status(500).send({
+                message: "Something went wrong"
+            })
         }
     }
 
