@@ -60,4 +60,20 @@ export class HoodieController implements controller {
         }
     }
 
+    @Get('/revenue:id')
+    async revenue(req: Request, res: Response) {
+        try {
+            const {id} = req.params;
+            const query = new GetSHoodiesQuery()
+            const revenue = await query.execute(id);
+            res.send({
+                result: revenue
+            });
+        }catch(e){
+            res.status(500).send({
+                "message": `Error: ${e}`
+            });
+        }
+    }
+
 }
