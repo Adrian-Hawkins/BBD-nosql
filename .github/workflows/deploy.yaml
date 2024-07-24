@@ -54,6 +54,3 @@ jobs:
         cd Terraform
         terraform init
         terraform apply -auto-approve
-#    - name: Force new deployment of ECS service
-#      run: |
-#        aws ecs update-service --cluster ${{ env.ECS_CLUSTER }} --service ${{ env.ECS_SERVICE }} --force-new-deployment

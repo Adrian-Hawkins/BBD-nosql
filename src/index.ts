@@ -3,7 +3,8 @@ import { registerControllers } from './server';
 import { Logger } from './lib/logging/logger';
 import {logRequest} from "./MiddleWare";
 import {
-  HelloController
+  HelloController,
+  HoodieController
 } from './controllers';
 const port = 8888;
 const app = express();
@@ -20,7 +21,8 @@ app.use(logRequest);
 
 
 registerControllers(app, [
-  HelloController
+  HelloController,
+  HoodieController
 ]);
 app.listen(port, () => {
   Logger.info(`Server is running on http://localhost:${port}`);
