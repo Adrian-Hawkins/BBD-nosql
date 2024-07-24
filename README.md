@@ -6,10 +6,10 @@
   - get orders 
   - get my order contain hoodie with x key and property
   - get revenue of hoodie with x key and property
-- [ ] Order
+- [x] Order
   - Create order(Get return order id)
-  - Add to order(Put hoodie in ordrer)
-  - complete order(PAtch)
+  - Add to order(Put hoodie in order)
+  - complete order
     - Get all items in order and put in document in table
-- [ ] Hoodie
+- [x] Hoodie
   - Create new hoodie
