@@ -13,3 +13,8 @@ variable "db_connection_string" {
   description = "Database connection string"
   type        = string
 }
+
+variable "image_tag" {
+  description = "Tag of the Docker image"
+  type        = string
+}
