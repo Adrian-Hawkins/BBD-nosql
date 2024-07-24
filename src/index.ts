@@ -6,6 +6,7 @@ import {
   HelloController,
   HoodieController
 } from './controllers';
+import {OrderController} from "./controllers/OrderController";
 const port = 8888;
 const app = express();
 app.use(express.json());
@@ -22,7 +23,8 @@ app.use(logRequest);
 
 registerControllers(app, [
   HelloController,
-  HoodieController
+  HoodieController,
+  OrderController
 ]);
 app.listen(port, () => {
   Logger.info(`Server is running on http://localhost:${port}`);
