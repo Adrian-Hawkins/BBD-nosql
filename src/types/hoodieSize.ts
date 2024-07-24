@@ -1,0 +1,1 @@
+export type hoodieSize = 'small' | 'medium' | 'large'
