@@ -6,6 +6,8 @@ import {AddHoodiesToOrderCommand} from "../commands/addHoodiesToOrder.command";
 import {GetOrderQuery} from "../queries/getOrder.query";
 import {CompleteOrderCommand} from "../commands/completeOrder.command";
 import {GetOrderWithQuery} from "../queries/getOrderwith.query";
+import { GetOrdersByCustomerCommand } from '../commands/getOrdersByCustomerEmail.command';
+import { GetAllOrdersCommand } from '../commands/getAllOrders.command';
 
 @Controller('/order')
 export class OrderController implements controller {
@@ -104,4 +106,38 @@ export class OrderController implements controller {
         }
     }
 
+    @Get('/getByEmail/:email')
+    async getOrdersByEmail(req: Request, res: Response) {
+        const { email } = req.params;
+        try {
+            const cmd = new GetOrdersByCustomerCommand()
+            const orders = await cmd.execute(email);
+            res.send({
+                message: "success",
+                orders
+            });
+        } catch (e) {
+            res.status(500).send({
+                message: "Something went wrong",
+                e
+            });
+        }
+    }
+
+    @Get('/all')
+    async getAll(req: Request, res: Response) {
+        try {
+            const cmd = new GetAllOrdersCommand()
+            const orders = await cmd.execute();
+            res.send({
+                message: "success",
+                orders
+            });
+        } catch (e) {
+            res.status(500).send({
+                message: "Something went wrong",
+                e
+            });
+        }
+    }
 }
