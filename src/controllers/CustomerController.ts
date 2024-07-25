@@ -7,7 +7,7 @@ import {CreateHoodieCommand} from "../commands/createHoodie.command";
 import {GetHoodiesQuery} from "../queries/getHoodies.query";
 import {GetSHoodiesQuery} from "../queries/getSHoodie.query";
 import { CreateCustomerCommand } from '../commands/createCustomer.command';
-import { GetAllCustomersCommand } from '../commands/GetAllCustomers.command';
+import { GetAllCustomersCommand } from '../commands/getAllCustomerss.command';
 
 @Controller('/customer')
 export class CustomerController implements controller {
