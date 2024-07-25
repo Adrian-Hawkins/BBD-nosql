@@ -47,10 +47,10 @@ export class OrderController implements controller {
             res.send({
                 message: "success"
             });
-        } catch(e) {
+        } catch(e: any) {
             res.status(500).send({
                 message: "Failed to add to order",
-                info: e
+                info: e.message
             })
         }
     }
