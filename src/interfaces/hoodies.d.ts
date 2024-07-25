@@ -3,4 +3,5 @@ export interface hoodies {
     price: number;
     hoodieDetails: object;
     hoodieSizes: string;
+    quantity: number;
 }

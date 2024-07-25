@@ -12,7 +12,8 @@ export class GetHoodiesQuery implements IQuery<Promise<hoodies[]>>{
                 "name",
                 "price",
                 "hoodieDetails",
-                "hoodieSizes"    
+                "hoodieSizes",
+                "color"
             FROM "Hoodies";
         `);
         return rows;

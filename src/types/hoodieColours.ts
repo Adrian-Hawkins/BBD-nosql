@@ -1,0 +1,1 @@
+export type HoodieColours = 'red'| 'blue'| 'green'| 'black'| 'white'| 'grey';
