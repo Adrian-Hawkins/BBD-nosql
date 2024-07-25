@@ -23,7 +23,7 @@ app.use((req, res, next) => {
 
 app.use(logRequest);
 
-// app.use(AuthMiddleware);
+app.use(AuthMiddleware);
 
 
 registerControllers(app, [
