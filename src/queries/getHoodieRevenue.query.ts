@@ -1,8 +1,8 @@
 import {IQuery} from "./IQuery";
 import {DBPool} from "../database";
 
-export class GetHoodieRevenue implements IQuery<Promise<any>,[hoodieId: number]>{
-    async execute(hoodieId: number){
+export class GetHoodieRevenueQuery implements IQuery<Promise<any>,[name: string]>{
+    async execute(name: string){
         try {
             const result = await DBPool.query(`
               WITH OrderItemsExpanded AS (
@@ -13,25 +13,25 @@ export class GetHoodieRevenue implements IQuery<Promise<any>,[hoodieId: number]>
               RelevantOrders AS (
                   SELECT "orderId", "orderComplete", item
                   FROM OrderItemsExpanded
-                  WHERE (item::jsonb->>'hoodieId')::INTEGER = $1
+                  WHERE (item::jsonb->>'name') = $1
                     AND "orderComplete" = true
               ),
               HoodieSales AS (
                 SELECT 
-                    item->>'hoodieId' AS hoodieId,
+                    item->>'name' AS name,
                     CAST(item->>'price' AS FLOAT) AS price
                 FROM 
                     relevantOrders
                 WHERE 
-                    (item->>'hoodieId')::INTEGER = $1
+                    (item->>'name') = $1
               )
               SELECT 
                     COALESCE(SUM(price), 0) AS total_sales
               FROM 
                     HoodieSales
               WHERE 
-                    hoodieId = $1;
-            `, [hoodieId]);
+                    name = $1;
+            `, [name]);
             return result.rows;
         } catch(e) {
             throw(e);

@@ -5,6 +5,7 @@ import { DBPool } from '../database';
 import {CreateHoodieCommand} from "../commands/createHoodie.command";
 import {GetHoodiesQuery} from "../queries/getHoodies.query";
 import {GetSHoodiesQuery} from "../queries/getSHoodie.query";
+import { GetHoodieRevenueQuery } from '../queries/getHoodieRevenue.query';
 
 @Controller('/hoodie')
 export class HoodieController implements controller {
@@ -60,12 +61,12 @@ export class HoodieController implements controller {
         }
     }
 
-    @Get('/revenue:id')
+    @Get('/:name/revenue')
     async revenue(req: Request, res: Response) {
         try {
-            const {id} = req.params;
-            const query = new GetSHoodiesQuery()
-            const revenue = await query.execute(id);
+            const {name} = req.params;
+            const query = new GetHoodieRevenueQuery()
+            const revenue = await query.execute(name);
             res.send({
                 result: revenue
             });
