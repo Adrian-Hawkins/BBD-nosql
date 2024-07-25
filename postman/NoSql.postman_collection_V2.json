@@ -1,0 +1,447 @@
+{
+	"info": {
+		"_postman_id": "e2e93b65-4d56-481d-97bf-272cd8ccb55d",
+		"name": "NoSql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29385230",
+		"_collection_link": "https://the-bean-index.postman.co/workspace/NoSqlDB~e7ee3410-4a69-4639-ac79-cfacee393077/collection/29385230-e2e93b65-4d56-481d-97bf-272cd8ccb55d?action=share&source=collection_link&creator=29385230"
+	},
+	"item": [
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lesedij@gamil.co.za\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/customer/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/customer/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"customer",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "hoodie",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dark Horse\",\r\n    \"price\": 21,\r\n    \"details\": {\r\n        \"brand\": \"something\",\r\n        \"something\": \"slkdfjdlkf\",\r\n        \"description\": \"dkdsfu\"\r\n    },\r\n    \"size\": \"medium\",\r\n    \"colour\": \"black\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/hoodie/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hoodie",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/hoodie/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hoodie",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": ":name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/hoodie/:name",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hoodie",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Dark Horse"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": ":name/revenue",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/hoodie/:name/revenue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"hoodie",
+								":name",
+								"revenue"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "Dark Horse"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "create/:email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/create/:email",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"create",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "lesedij@gamil.co.za"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addToOrder",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"hoodieNames\": [\"redhoodie\", \"Dark Horse\"], \r\n    \"orderId\": 10, \r\n    \"quantity\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order/addToOrder",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"addToOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrder/:orderId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/getOrder/:orderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"getOrder",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "complete/:orderId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/complete/:orderId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"complete",
+								":orderId"
+							],
+							"variable": [
+								{
+									"key": "orderId",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withKey",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"lesedij@gamil.co.za\",\r\n    \"key\": \"brand\",\r\n    \"value\": \"something\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order/withKey",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"withKey"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByEmail/:email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/getByEmail/:email",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"getByEmail",
+								":email"
+							],
+							"variable": [
+								{
+									"key": "email",
+									"value": "lesedij@gmail.co.za"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/order/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.globals.set(\"device_code\", response.code.device_code);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/auth/code",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.globals.set(\"access_token\", response.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"deviceCode\": \"{{device_code}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/getToken",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"getToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
