@@ -32,9 +32,11 @@ export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodie
                 WHERE "orderId" = $1
             `, [orderId]);
             const existingOrderItems = orderResult.rows[0].orderItems;
-            const existingTotalPrice = orderResult.rows[0].totalPrice;
 
             const updatedOrderItems = [...existingOrderItems, ...hoodies_quantity];
+            if(hoodies_quantity.length === 0) {
+                throw new Error('No hoodies found');
+            }
             const newHoodiesPrice = updatedOrderItems.reduce((sum, hoodie) => sum + (hoodie.price * hoodie.quantity), 0);
             const formattedOrderItems = updatedOrderItems.map(item => JSON.stringify(item));
             await DBPool.query(`
