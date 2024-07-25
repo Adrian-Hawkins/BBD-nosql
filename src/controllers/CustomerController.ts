@@ -7,6 +7,7 @@ import {CreateHoodieCommand} from "../commands/createHoodie.command";
 import {GetHoodiesQuery} from "../queries/getHoodies.query";
 import {GetSHoodiesQuery} from "../queries/getSHoodie.query";
 import { CreateCustomerCommand } from '../commands/createCustomer.command';
+import { GetAllCustomersCommand } from '../commands/getAllCustomerss.command';
 
 @Controller('/customer')
 export class CustomerController implements controller {
@@ -26,6 +27,22 @@ export class CustomerController implements controller {
             res.send({
                 "message": "Customer Created",
                 ID
+            });
+        }catch(e){
+            res.status(500).send({
+                "message": `Error: ${e}`
+            });
+        }
+    }
+
+    @Get('/all')
+    async getAllCustomers(req: Request, res: Response) {
+        try {
+            const cmd = new GetAllCustomersCommand();
+            const customers = await cmd.execute();
+            res.send({
+                "message": "Success",
+                customers
             });
         }catch(e){
             res.status(500).send({
