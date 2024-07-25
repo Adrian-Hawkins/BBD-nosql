@@ -15,7 +15,7 @@ export class CompleteOrderCommand implements ICommand<Promise<void>,[orderId:str
                 FROM "Orders"
                 WHERE "orderId" = $1
             `, [orderId]);
-            const total = orderResult.rows[0].orderItems.reduce((sum, item) => sum + item.price, 0);
+            const total = orderResult.rows[0].orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             console.log(total)
             const result = await DBPool.query(`
                 UPDATE "Orders"

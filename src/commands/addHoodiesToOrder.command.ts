@@ -4,9 +4,9 @@ import {QueryResult} from "pg";
 import {hoodies} from "../interfaces/hoodies";
 
 
-export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodieNames: string[], orderId: number]> {
+export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodieNames: string[], orderId: number, quantity: number]> {
 
-    async execute(hoodieNames: string[], orderId: number): Promise<void> {
+    async execute(hoodieNames: string[], orderId: number, quantity: number): Promise<void> {
         try {
             await DBPool.query('BEGIN');
             const hoodieResult = await DBPool.query(`
@@ -21,6 +21,10 @@ export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodie
                 WHERE "name" = ANY($1)
             `, [hoodieNames]);
             const hoodies: hoodies[] = hoodieResult.rows;
+            const hoodies_quantity = hoodieResult.rows.map(hoodie => ({
+                ...hoodie,
+                quantity: quantity
+            }));
 
             const orderResult = await DBPool.query(`
                 SELECT "orderItems", "totalPrice"
@@ -30,15 +34,14 @@ export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodie
             const existingOrderItems = orderResult.rows[0].orderItems;
             const existingTotalPrice = orderResult.rows[0].totalPrice;
 
-            const updatedOrderItems = [...existingOrderItems, ...hoodies];
-            const newHoodiesPrice = hoodies.reduce((sum, hoodie) => sum + hoodie.price, 0);
-            const updatedTotalPrice = existingTotalPrice + newHoodiesPrice;
+            const updatedOrderItems = [...existingOrderItems, ...hoodies_quantity];
+            const newHoodiesPrice = updatedOrderItems.reduce((sum, hoodie) => sum + (hoodie.price * hoodie.quantity), 0);
             const formattedOrderItems = updatedOrderItems.map(item => JSON.stringify(item));
             await DBPool.query(`
                 UPDATE "Orders"
                 SET "orderItems" = $1::jsonb[], "totalPrice" = $2
                 WHERE "orderId" = $3
-            `, [formattedOrderItems, updatedTotalPrice, orderId]);
+            `, [formattedOrderItems, newHoodiesPrice, orderId]);
 
             await DBPool.query('COMMIT');
         } catch (e) {

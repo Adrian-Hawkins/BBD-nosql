@@ -40,9 +40,10 @@ export class OrderController implements controller {
     @Patch('/addToOrder')
     async addToOrder(req: Request, res: Response) {
         const { hoodieNames, orderId } = req.body;
+        const quantity = req.body.quantity != null ? parseInt(req.body.quantity, 10) : 1;
         try {
             const cmd = new AddHoodiesToOrderCommand();
-            await cmd.execute(hoodieNames, orderId);
+            await cmd.execute(hoodieNames, orderId, quantity);
             res.send({
                 message: "success"
             });
