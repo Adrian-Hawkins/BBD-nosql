@@ -91,10 +91,10 @@ export class OrderController implements controller {
 
     @Post('/withKey')
     async withKey(req: Request, res: Response) {
-        const { customerId, key, value } = req.body;
+        const { email, key, value } = req.body;
         try {
             const query = new GetOrderWithQuery();
-            const orders = await query.execute(customerId, key, value);
+            const orders = await query.execute(email, key, value);
             res.send({
                 message: "success",
                 orders
