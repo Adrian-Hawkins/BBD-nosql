@@ -1,7 +1,7 @@
 export async function isGitHubTokenValid(token: string): Promise<boolean> {
     const url = "https://api.github.com/user";
     const headers = {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': token,
         'Accept': 'application/json'
     };
 
