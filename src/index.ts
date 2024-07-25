@@ -3,6 +3,7 @@ import { registerControllers } from './server';
 import { Logger } from './lib/logging/logger';
 import {logRequest} from "./MiddleWare";
 import {
+  CustomerController,
   HelloController,
   HoodieController
 } from './controllers';
@@ -24,7 +25,8 @@ app.use(logRequest);
 registerControllers(app, [
   HelloController,
   HoodieController,
-  OrderController
+  OrderController,
+  CustomerController
 ]);
 app.listen(port, () => {
   Logger.info(`Server is running on http://localhost:${port}`);
