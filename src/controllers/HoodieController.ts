@@ -18,9 +18,9 @@ export class HoodieController implements controller {
     @Post('/create')
     async create(req: Request, res: Response) {
         try {
-            const {name, price, details, size} = req.body;
+            const {name, price, details, size, colour} = req.body;
             const cmd = new CreateHoodieCommand();
-            await cmd.execute(name, price, details, size);
+            await cmd.execute(name, price, details, size, colour);
             res.send({
                 "message": "Hoodie created"
             });

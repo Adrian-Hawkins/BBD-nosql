@@ -14,6 +14,8 @@ export class AddHoodiesToOrderCommand implements ICommand<Promise<void>, [hoodie
                     "hoodieId",
                     "name",
                     "price",
+                    "hoodieSizes" AS size,
+                    "color" AS colour,
                     "hoodieDetails" AS details
                 FROM "Hoodies"
                 WHERE "name" = ANY($1)
