@@ -5,6 +5,7 @@ import { DBPool } from '../database';
 import {CreateHoodieCommand} from "../commands/createHoodie.command";
 import {GetHoodiesQuery} from "../queries/getHoodies.query";
 import {GetSHoodiesQuery} from "../queries/getSHoodie.query";
+import { GetHoodieRevenueQuery } from '../queries/getHoodieRevenue.query';
 
 @Controller('/hoodie')
 export class HoodieController implements controller {
@@ -52,6 +53,22 @@ export class HoodieController implements controller {
             const hoodie = await query.execute(name);
             res.send({
                 result: hoodie
+            });
+        }catch(e){
+            res.status(500).send({
+                "message": `Error: ${e}`
+            });
+        }
+    }
+
+    @Get('/:name/revenue')
+    async revenue(req: Request, res: Response) {
+        try {
+            const {name} = req.params;
+            const query = new GetHoodieRevenueQuery()
+            const revenue = await query.execute(name);
+            res.send({
+                result: revenue
             });
         }catch(e){
             res.status(500).send({
